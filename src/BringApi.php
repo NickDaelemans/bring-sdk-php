@@ -16,7 +16,8 @@ class BringApi {
 
   private string $uuid;
 
-  /**g
+  /**
+   * Get the headers.
    *
    * @return string[]
    */
@@ -25,6 +26,8 @@ class BringApi {
   }
 
   /**
+   * Set the headers.
+   *
    * @param string[] $headers
    */
   public function setHeaders(array $headers): void {
@@ -62,6 +65,7 @@ class BringApi {
    *
    * @return object|NULL
    *   The request response or FALSE if something goes wrong.
+   * @throws \GuzzleHttp\Exception\GuzzleException
    */
   protected function createRequest($url, $options = [], $method = 'POST'): ?object {
     try {
@@ -111,12 +115,27 @@ class BringApi {
     ], 'PUT');
   }
 
-  public function getLists() {
-    return $this->createRequest(URL . 'bringusers/' . $this->uuid . '/lists', [], 'GET');
+  /**
+   * Get lists for logged in user.
+   *
+   * @return array|NULL
+   *   The lists.
+   */
+  public function getLists(): ?array {
+    return json_decode($this->createRequest(URL . 'bringusers/' . $this->uuid . '/lists', [], 'GET'));
   }
 
-  public function getItemsFromList($listUuid) { 
-    return $this->createRequest(URL . 'bringlists/' . $listUuid, [], 'GET');
+  /**
+   * Get items for a given list.
+   *
+   * @param $listUuid
+   *   The uuid of the list.
+   *
+   * @return array|null
+   *   The items of the list.
+   */
+  public function getItemsFromList($listUuid): ?array {
+    return json_decode($this->createRequest(URL . 'bringlists/' . $listUuid, [], 'GET'));
   }
 
 }
