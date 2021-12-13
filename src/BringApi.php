@@ -118,10 +118,10 @@ class BringApi {
   /**
    * Get lists for logged in user.
    *
-   * @return array|NULL
+   * @return object|NULL
    *   The lists.
    */
-  public function getLists(): ?array {
+  public function getLists(): ?object {
     return json_decode($this->createRequest(URL . 'bringusers/' . $this->uuid . '/lists', [], 'GET'));
   }
 
@@ -131,10 +131,10 @@ class BringApi {
    * @param $listUuid
    *   The uuid of the list.
    *
-   * @return array|null
+   * @return object|null
    *   The items of the list.
    */
-  public function getItemsFromList($listUuid): ?array {
+  public function getItemsFromList($listUuid): ?object {
     return json_decode($this->createRequest(URL . 'bringlists/' . $listUuid, [], 'GET'));
   }
 
