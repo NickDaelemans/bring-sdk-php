@@ -1,0 +1,22 @@
+{
+    "name": "nickdaelemans/bring-sdk",
+    "description": "SDK package for connection with Bring Shopping list",
+    "type": "library",
+    "license": "proprietary",
+    "autoload": {
+        "psr-4": {
+            "BringSdk\\": "src/Bring"
+        }
+    },
+    "authors": [
+        {
+            "name": "Nick Daelemans",
+            "email": "nickdaelemans@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "guzzlehttp/guzzle": "7.4.x-dev",
+      "ext-json": "*"
+    }
+}
