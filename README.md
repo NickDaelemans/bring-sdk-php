@@ -1,5 +1,12 @@
 # Bring Shopping List PHP SDK
 
+## Why
+
+This is a personal project where I wanted to use a smart button to allow me to add stuff to my Bring shopping list, by pressing the button.
+
+At the time of creation, there were no integrations that I could use, so I decided to write my own. 
+I based myself on the https://github.com/foxriver76/node-bring-api repository.
+
 ## How to install
 
 Simply run ``composer require nickdaelemans/bring-sdk``
