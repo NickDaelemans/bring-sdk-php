@@ -14,7 +14,10 @@ class BringApi {
 
   private array $headers;
 
+  private string $uuid;
+
   /**g
+   *
    * @return string[]
    */
   public function getHeaders(): array {
@@ -63,10 +66,13 @@ class BringApi {
   protected function createRequest($url, $options = [], $method = 'POST'): ?object {
     try {
       $client = new Client();
-      $res = $client->request($method, $url, [
+      $body = [
         'headers' => $this->headers,
-        'form_params' => $options,
-      ]);
+      ];
+      if ($options) {
+        $body['form_params'] = $options;
+      }
+      $res = $client->request($method, $url, $body);
       return $res->getBody();
     } catch (Exception $exception) {
       echo 'Something went wrong. ' . $exception->getMessage();
@@ -84,6 +90,7 @@ class BringApi {
     ]);
     $result = json_decode($response);
     $this->headers['X-BRING-USER-UUID'] = $result->uuid;
+    $this->uuid = $result->uuid;
     $this->headers['Authorization'] = 'Bearer ' . $result->access_token;
   }
 
@@ -102,6 +109,14 @@ class BringApi {
       'purchase' => $name,
       'specification' => $specification,
     ], 'PUT');
+  }
+
+  public function getLists() {
+    return $this->createRequest(URL . 'bringusers/' . $this->uuid . '/lists', [], 'GET');
+  }
+
+  public function getItemsFromList($listUuid) { 
+    return $this->createRequest(URL . 'bringlists/' . $listUuid, [], 'GET');
   }
 
 }
